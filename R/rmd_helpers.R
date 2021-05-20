@@ -12,6 +12,9 @@
 #' inline_hook(c(1.2993992, 0.03, 1000))
 #' inline_hook(c("cats", "dogs"))
 inline_hook <- function(x) {
+  if (any(is.na(x))) {
+    warning("`x` contains `NA` values.")
+  }
   x_formatted <- purrr::map_chr(x, format_number)
   return(paste_oxford_list(x_formatted))
 }
